@@ -40,6 +40,14 @@ namespace WarriorSimulator2000.Calculators
             return RageFormula(damage, RageConversion(stats.Level), weapon.Speed, HitFactor(weapon, outcome));
         }
 
+        public static int ReduceArmor(int damage, CharacterStats stats, Target target)
+        {
+            var mitigationValue = (0.1 * target.Armor) / (8.5 * stats.Level + 40);
+            var mitigation = 1 - (mitigationValue / (1 + mitigationValue));
+
+            return damage * WowMath.ToInt(mitigation);
+        }
+
         private static double RageFormula(int damage, double rageConversion, double weaponSpeed, double hitFactor)
         {
             double combinedRage = RageFromDamage(damage, rageConversion) + ExtraRage(weaponSpeed, hitFactor);

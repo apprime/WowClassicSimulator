@@ -1,4 +1,5 @@
-﻿using WarriorSimulator2000.Engine;
+﻿using WarriorSimulator2000.Calculators;
+using WarriorSimulator2000.Engine;
 
 namespace WarriorSimulator2000.Warrior
 {
@@ -13,27 +14,28 @@ namespace WarriorSimulator2000.Warrior
     /// and converting each extra point of rage into 15 additional damage.
     /// Only usable on enemies that have 20% or less health.
     /// </summary>
-    public class Execute : Skill
+    public class Execute : SkillBase, Skill
     {
+        public string Name => "Execute";
 
+        public override int Cooldown { get; set; } = 0;
 
-        /// <param name="stats"></param>
-        /// <returns></returns>
-        public Swing Activate(CharacterStats stats)
+        public bool IsBlocking => true;
+
+        public Swing Activate(CharacterStats stats, Target target)
         {
-            
-            
-            var swing = new Swing();
-
-            swing.Outcome = stats.AttackTable.Roll();
-
-            swing.Damage = 600 + 15 * stats.Resource;
+            var swing = new Swing
+            {
+                Outcome = HitTable.Roll(stats.MainHand.Table),
+                Damage = 600 + (15 * stats.Resource)
+            };
 
             stats.Resource = 0;
 
+            swing.Damage = Damage.ReduceArmor(swing.Damage, stats, target);
+            return swing;
         }
 
         public bool ShouldActivate(CharacterStats stats, Target target) => target.Health / target.TotalHealth <= 0.2d;
-
     }
 }

@@ -2,8 +2,8 @@
 {
     public interface Rotation
     {
-        Skill GCDNext(CharacterStats stats);
-        Skill? NoGCDNext(CharacterStats stats);
+        Skill? GCDNext(CharacterStats stats, Target target);
+        Skill? NoGCDNext(CharacterStats stats, Target target);
 
         bool GCDAvailable { get; }
         void StartGCD();

@@ -13,14 +13,17 @@ namespace WarriorSimulator2000.Warrior
             new Execute(),
             new Overpower(),
             new Bloodthirst(),
-            new Whirlwind()
+            new Whirlwind(),
+            new Hamstring()
         };
 
-
-        public Skill GCDNext(CharacterStats stats)
+        private Skill[] NoGCDPriorities = new Skill[]
         {
-            throw new NotImplementedException();
-        }
+            new BloodRage(),
+            new HeroicStrike()
+        };
+
+        public Skill? GCDNext(CharacterStats stats, Target target) => GetSkill(GCDPriorities, stats, target);
 
         public bool MayMainHand(CharacterStats stats)
         {
@@ -32,9 +35,8 @@ namespace WarriorSimulator2000.Warrior
             throw new NotImplementedException();
         }
 
-        public Skill? NoGCDNext(CharacterStats stats)
-        {
-            throw new NotImplementedException();
-        }
+        public Skill? NoGCDNext(CharacterStats stats, Target target) => GetSkill(NoGCDPriorities, stats, target);
+
+        
     }
 }

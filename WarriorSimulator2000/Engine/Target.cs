@@ -9,5 +9,6 @@
 
         public int Health { get; internal set; }
         public int TotalHealth { get; internal set; }
+        public int Armor { get; internal set; }
     }
 }

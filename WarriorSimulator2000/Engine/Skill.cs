@@ -2,7 +2,13 @@
 {
     public interface Skill
     {
-        bool ShouldActivate(CharacterStats stats);
-        Swing Activate(CharacterStats stats);
+        string Name { get; }
+
+        int Cooldown { get; set; }
+
+        bool ShouldActivate(CharacterStats stats, Target target);
+        bool CanActivate();
+        bool IsBlocking { get; }
+        Swing Activate(CharacterStats stats, Target target);
     }
 }

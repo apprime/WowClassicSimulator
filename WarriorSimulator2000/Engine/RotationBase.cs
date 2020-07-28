@@ -10,5 +10,26 @@
         {
             GlobalCooldownRemaining = GlobalCooldownLength;
         }
+
+        public Skill? GetSkill(Skill[] orderedList, CharacterStats stats, Target target)
+        {
+            foreach (var skill in orderedList)
+            {
+                if (skill.ShouldActivate(stats, target))
+                {
+                    if (skill.CanActivate())
+                    {
+                        return skill;
+                    }
+
+                    if (skill.IsBlocking)
+                    {
+                        break;
+                    }
+                }
+            }
+
+            return null;
+        }
     }
 }

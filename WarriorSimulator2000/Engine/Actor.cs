@@ -4,6 +4,6 @@
     {
         CharacterStats Stats { get; set; }
         Rotation Rotation { get; set; }
-
+        WowClass Class { get; }
     }
 }
