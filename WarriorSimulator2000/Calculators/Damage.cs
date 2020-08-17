@@ -6,7 +6,7 @@ namespace WarriorSimulator2000.Calculators
     public static class Damage
     {
         private static readonly Random rng = new Random();
-        public static int Calculate(Outcome outcome, CharacterStats stats, Weapon weapon)
+        public static int Calculate(Outcome outcome, Stats stats, Weapon weapon)
         {
             switch(outcome)
             {
@@ -35,14 +35,14 @@ namespace WarriorSimulator2000.Calculators
             );
         }
 
-        public static double CalculateRage(Outcome outcome,CharacterStats stats, int damage, Weapon weapon)
+        public static double CalculateRage(Outcome outcome, Stats stats, int damage, Weapon weapon)
         {
-            return RageFormula(damage, RageConversion(stats.Level), weapon.Speed, HitFactor(weapon, outcome));
+            return RageFormula(damage, RageConversion(stats.Character.Level), weapon.Speed, HitFactor(weapon, outcome));
         }
 
-        public static int ReduceArmor(int damage, CharacterStats stats, Target target)
+        public static int ReduceArmor(int damage, Stats stats, Target target)
         {
-            var mitigationValue = (0.1 * target.Armor) / (8.5 * stats.Level + 40);
+            var mitigationValue = (0.1 * target.Armor) / (8.5 * stats.Character.Level + 40);
             var mitigation = 1 - (mitigationValue / (1 + mitigationValue));
 
             return damage * WowMath.ToInt(mitigation);

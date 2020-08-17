@@ -23,20 +23,23 @@ namespace WarriorSimulator2000.Warrior
             new HeroicStrike()
         };
 
-        public Skill? GCDNext(CharacterStats stats, Target target) => GetSkill(GCDPriorities, stats, target);
+        public void CooldownTick()
+        {
+            base.CooldownTick(GCDPriorities);
+        }
 
-        public bool MayMainHand(CharacterStats stats)
+        public Skill? GCDNext(Stats stats, Target target) => GetSkill(GCDPriorities, stats, target);
+
+        public bool MayMainHand(Stats stats)
         {
             throw new NotImplementedException();
         }
 
-        public bool MayOffHand(CharacterStats stats)
+        public bool MayOffHand(Stats stats)
         {
             throw new NotImplementedException();
         }
 
-        public Skill? NoGCDNext(CharacterStats stats, Target target) => GetSkill(NoGCDPriorities, stats, target);
-
-        
+        public Skill? NoGCDNext(Stats stats, Target target) => GetSkill(NoGCDPriorities, stats, target);
     }
 }

@@ -9,17 +9,6 @@ namespace WarriorSimulator2000.Engine
     {
         public virtual int Cooldown {get; set;}
 
-        public bool CanActivate()
-        {
-            if (Cooldown-- > 0)
-            {
-                return false;
-            }
-            else
-            {
-                Cooldown = 0;
-                return true;
-            }
-        }
+        public bool CanActivate() => Cooldown <= 0;
     }
 }

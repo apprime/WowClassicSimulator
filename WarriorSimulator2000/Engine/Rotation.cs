@@ -2,12 +2,13 @@
 {
     public interface Rotation
     {
-        Skill? GCDNext(CharacterStats stats, Target target);
-        Skill? NoGCDNext(CharacterStats stats, Target target);
+        Skill? GCDNext(Stats stats, Target target);
+        Skill? NoGCDNext(Stats stats, Target target);
 
         bool GCDAvailable { get; }
         void StartGCD();
-        bool MayMainHand(CharacterStats stats);
-        bool MayOffHand(CharacterStats stats);
+        bool MayMainHand(Stats stats);
+        bool MayOffHand(Stats stats);
+        void CooldownTick();
     }
 }

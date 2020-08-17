@@ -9,6 +9,9 @@
         Parry,
         Block,
         Glancing,
-        Crushing
+        Crushing,
+        Absorb,
+        Resist,
+        Noop
     }
 }

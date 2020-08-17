@@ -6,9 +6,9 @@
 
         int Cooldown { get; set; }
 
-        bool ShouldActivate(CharacterStats stats, Target target);
+        bool ShouldActivate(Stats stats, Target target);
         bool CanActivate();
         bool IsBlocking { get; }
-        Swing Activate(CharacterStats stats, Target target);
+        Swing Activate(Stats stats, Target target);
     }
 }

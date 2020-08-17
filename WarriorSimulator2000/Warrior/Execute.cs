@@ -22,7 +22,7 @@ namespace WarriorSimulator2000.Warrior
 
         public bool IsBlocking => true;
 
-        public Swing Activate(CharacterStats stats, Target target)
+        public Swing Activate(Stats stats, Target target)
         {
             var swing = new Swing
             {
@@ -36,6 +36,6 @@ namespace WarriorSimulator2000.Warrior
             return swing;
         }
 
-        public bool ShouldActivate(CharacterStats stats, Target target) => target.Health / target.TotalHealth <= 0.2d;
+        public bool ShouldActivate(Stats stats, Target target) => target.Health / target.TotalHealth <= 0.2d;
     }
 }

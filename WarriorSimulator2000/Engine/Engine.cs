@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using WarriorSimulator2000.Calculators;
 
 namespace WarriorSimulator2000.Engine
@@ -23,11 +22,17 @@ namespace WarriorSimulator2000.Engine
             for(var i = 0; i < ticks; i++)
             {
                 CalculateHitTables();
+                UpdateCooldowns();
                 CastGCDSkill();
                 CastNoGCDSkill();
                 SwingMainHand();
                 SwingOffhand();
             }
+        }
+
+        private void UpdateCooldowns()
+        {
+            actor.Rotation.CooldownTick();
         }
 
         private void SwingOffhand()
@@ -66,6 +71,11 @@ namespace WarriorSimulator2000.Engine
         private void CastNoGCDSkill()
         {
             Skill? skill = actor.Rotation.NoGCDNext(actor.Stats, target);
+            ActivateSkill(skill);
+        }
+
+        private void ActivateSkill(Skill? skill)
+        {
             if (skill != null)
             {
                 var swing = skill.Activate(actor.Stats, target);
@@ -77,12 +87,9 @@ namespace WarriorSimulator2000.Engine
         {
             if (actor.Rotation.GCDAvailable)
             {
-                var skill = actor.Rotation.GCDNext(actor.Stats, target);
-                var swing = skill.Activate(actor.Stats, target);
+                Skill? skill = actor.Rotation.GCDNext(actor.Stats, target);
+                ActivateSkill(skill);
 
-                Log.Add(skill.Name, swing);
-
-                //resolve swing
                 actor.Rotation.StartGCD();
             }
         }

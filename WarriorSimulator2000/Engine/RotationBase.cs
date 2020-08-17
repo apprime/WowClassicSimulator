@@ -11,7 +11,7 @@
             GlobalCooldownRemaining = GlobalCooldownLength;
         }
 
-        public Skill? GetSkill(Skill[] orderedList, CharacterStats stats, Target target)
+        public Skill? GetSkill(Skill[] orderedList, Stats stats, Target target)
         {
             foreach (var skill in orderedList)
             {
@@ -30,6 +30,19 @@
             }
 
             return null;
+        }
+
+        public void CooldownTick(Skill[] skills)
+        {
+            GlobalCooldownRemaining -= 1;
+
+            foreach (var skill in skills)
+            {
+                if(skill.Cooldown > 0)
+                {
+                    skill.Cooldown -= 1;
+                }
+            }
         }
     }
 }

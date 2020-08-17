@@ -2,7 +2,20 @@
 
 namespace WarriorSimulator2000.Warrior
 {
-    internal class Recklessness : Skill
+    internal class Recklessness : SkillBase, Skill
     {
+        public string Name => throw new System.NotImplementedException();
+
+        public bool IsBlocking => throw new System.NotImplementedException();
+
+        public Swing Activate(Stats stats, Target target)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool ShouldActivate(Stats stats, Target target)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
